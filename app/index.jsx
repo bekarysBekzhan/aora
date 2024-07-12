@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Redirect, router } from 'expo-router';
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import CustomButton from '../components/CustomButton'; // Adjust the path as needed
 import { images } from '../constants'; // Adjust the path as needed
@@ -6,95 +8,43 @@ import { colors, fonts, sizes, spacing } from '../constants/styles'
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View style={styles.container}>
+        <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image
             source={images.logo}
-            style={styles.logo}
+            className="w-[130px] h-[84px]"
             resizeMode='contain'
           />
           <Image
             source={images.cards}
-            style={styles.cards}
+            className="max-w-[380px] w-full h-[300px]"
             resizeMode='contain'
           />
-          <View style={styles.textView}>
-            <Text style={styles.mainText}>
+          <View className="relative mt-5">
+            <Text className="text-3xl text-white font-bold text-center">
               Discover Endless Possibilities with {' '}
-              <Text style={styles.highlightText}>Aora</Text>
+              <Text className="text-secondary-200">Aora</Text>
             </Text>
             <Image 
               source={images.path}
-              style={styles.pathImage}
+              className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
               resizeMode='contain'
             />
           </View>
-          <Text style={styles.subText}>
+          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
             Where creativity meets innovation:
             embark on a journey of limitless exploration with Aora
           </Text>
-          <CustomButton
+          <CustomButton 
             title="Continue with email"
-            handlePress={() => {}}
-            containerStyles={styles.buttonContainer}
+            handlePress={() => router.push('/sign-in')}
+            containerStyles="w-full mt-7"
           />
         </View>
       </ScrollView>
+      <StatusBar backgroundColor='#161622' style='dark'/>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.primary,
-  },
-  container: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    paddingHorizontal: 16, // Adjust as needed
-  },
-  logo: {
-    width: 130,
-    height: 84,
-  },
-  cards: {
-    maxWidth: 380,
-    width: '100%',
-    height: 300,
-  },
-  textView: {
-    position: 'relative',
-    marginTop: 20,
-  },
-  mainText: {
-    fontSize: 24,
-    color: '#FFFFFF', 
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  highlightText: {
-    color: colors.secondary[200], // Replace with your secondary color
-  },
-  pathImage: {
-    width: 136,
-    height: 15,
-    position: 'absolute',
-    bottom: -10,
-    right: -20,
-  },
-  subText: {
-    fontSize: 14,
-    fontFamily: fonts.pregular, // Ensure the font is loaded correctly
-    color: colors.gray[100], // Replace with your color
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    width: '100%',
-    marginTop: 20,
-  },
-});
